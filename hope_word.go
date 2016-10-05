@@ -8,22 +8,29 @@ import (
 	"github.com/huichen/sego"
 )
 
-var segmenter sego.Segmenter
-
 const DICT_PATH = "dict.txt"
 
 func main() {
-	segmenter.LoadDictionary(DICT_PATH)
+	r := gin.Default()
+	r.Use(Segmenter())
+	r.POST("/validate", validateEndPoint)
+	r.POST("/filter", filterEndPoint)
+	r.Run(":8000")
+}
 
-	router := gin.Default()
-	router.POST("/validate", validateEndPoint)
-	router.POST("/filter", filterEndPoint)
-	router.Run(":3001")
+func Segmenter() gin.HandlerFunc {
+	var segmenter sego.Segmenter
+	segmenter.LoadDictionary(DICT_PATH)
+	return func(c *gin.Context) {
+		c.Set("Segmenter", segmenter)
+		c.Next()
+	}
 }
 
 func validateEndPoint(c *gin.Context) {
 	text := c.PostForm("message")
-	segments := segmenter.Segment([]byte(text))
+	s := c.MustGet("Segmenter").(sego.Segmenter)
+	segments := s.Segment([]byte(text))
 	if IsContainInvalidWord(segments) {
 		c.JSON(200, gin.H{"result": "false"})
 	} else {
@@ -43,7 +50,8 @@ func IsContainInvalidWord(segments []sego.Segment) bool {
 
 func filterEndPoint(c *gin.Context) {
 	text := c.PostForm("message")
-	segments := segmenter.Segment([]byte(text))
+	s := c.MustGet("Segmenter").(sego.Segmenter)
+	segments := s.Segment([]byte(text))
 	text = ReplaceInvalidWords(segments, text)
 	c.JSON(200, gin.H{"result": text})
 }
