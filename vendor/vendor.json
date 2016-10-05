@@ -3,6 +3,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "Iyr8d/LgFGaPuIjKjkAoGmLwb7o=",
+			"path": "github.com/adamzy/cedar-go",
+			"revision": "d348c21f72432c2b6d5f05f68759fde94f64b227",
+			"revisionTime": "2015-11-03T15:22:50Z"
+		},
+		{
 			"checksumSHA1": "XxSDNaJf0LpjvMapDmmhNIlf+MQ=",
 			"path": "github.com/gin-gonic/gin",
 			"revision": "5caaac4c5c712a9e7a7de29e6c24ef46c753017f",
@@ -25,6 +31,12 @@
 			"path": "github.com/golang/protobuf/proto",
 			"revision": "df1d3ca07d2d07bba352d5b73c4313b4e2a6203e",
 			"revisionTime": "2016-09-27T20:09:49Z"
+		},
+		{
+			"checksumSHA1": "RFls49mTGsK2vqTRR+pCHNgv/WY=",
+			"path": "github.com/huichen/sego",
+			"revision": "d06fe1b3abe3877ab593b57e5e43daf6c4c25add",
+			"revisionTime": "2015-11-01T11:26:41Z"
 		},
 		{
 			"checksumSHA1": "b0T0Hzd+zYk+OCDTFMps+jwa/nY=",
