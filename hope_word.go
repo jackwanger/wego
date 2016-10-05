@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"strings"
 	"unicode/utf8"
 
@@ -8,19 +9,26 @@ import (
 	"github.com/huichen/sego"
 )
 
-const DICT_PATH = "dict.txt"
+var port string
+var files string
+
+func init() {
+	flag.StringVar(&files, "files", "dict.txt", "dict files, seperated by comma")
+	flag.StringVar(&port, "port", ":8000", "listen port")
+	flag.Parse()
+}
 
 func main() {
 	r := gin.Default()
-	r.Use(Segmenter())
+	r.Use(Segmenter(files))
 	r.POST("/validate", validateEndPoint)
 	r.POST("/filter", filterEndPoint)
-	r.Run(":8000")
+	r.Run(port)
 }
 
-func Segmenter() gin.HandlerFunc {
+func Segmenter(files string) gin.HandlerFunc {
 	var segmenter sego.Segmenter
-	segmenter.LoadDictionary(DICT_PATH)
+	segmenter.LoadDictionary(files)
 	return func(c *gin.Context) {
 		c.Set("Segmenter", segmenter)
 		c.Next()
