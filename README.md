@@ -1,4 +1,7 @@
 # hope_word
+
+![travis](https://travis-ci.org/repong/hope_word.svg?branch=master)
+
 基于sego的屏蔽字过滤器
 
 ### 用法
