@@ -52,10 +52,11 @@ func filterEndPoint(c *gin.Context) {
 	text := c.PostForm("message")
 	s := c.MustGet("Segmenter").(sego.Segmenter)
 	segments := s.Segment([]byte(text))
-	text = ReplaceInvalidWords(segments, text)
+	text = replaceInvalidWords(segments, text)
 	c.JSON(200, gin.H{"result": text})
 }
-func ReplaceInvalidWords(segments []sego.Segment, text string) string {
+
+func replaceInvalidWords(segments []sego.Segment, text string) string {
 	for _, seg := range segments {
 		token := seg.Token()
 		if token.Frequency() > 1 {
