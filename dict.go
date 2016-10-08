@@ -2,7 +2,6 @@
 // sources:
 // dict/chinese_dictionary.txt
 // dict/english_dictionary.txt
-// dict/test.txt
 // DO NOT EDIT!
 
 package main
@@ -85,7 +84,7 @@ func chinese_dictionaryTxt() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "chinese_dictionary.txt", size: 19006, mode: os.FileMode(420), modTime: time.Unix(1475914390, 0)}
+	info := bindataFileInfo{name: "chinese_dictionary.txt", size: 19006, mode: os.FileMode(420), modTime: time.Unix(1475917668, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -105,27 +104,7 @@ func english_dictionaryTxt() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "english_dictionary.txt", size: 731, mode: os.FileMode(420), modTime: time.Unix(1475914390, 0)}
-	a := &asset{bytes: bytes, info: info}
-	return a, nil
-}
-
-var _testTxt = []byte("\x1f\x8b\x08\x00\x00\x09\x6e\x88\x00\xff\x7a\xb6\xb5\xfb\xc5\xfa\xa9\x0a\x46\x5c\x2f\x67\x6f\x7f\xd1\x35\x49\xc1\x88\xab\x28\xb5\x20\x3f\x2f\x5d\xc1\x88\x2b\xc8\x35\xc0\xdf\xcf\x5d\xc1\x88\x0b\x10\x00\x00\xff\xff\xf1\x22\xb6\x23\x24\x00\x00\x00")
-
-func testTxtBytes() ([]byte, error) {
-	return bindataRead(
-		_testTxt,
-		"test.txt",
-	)
-}
-
-func testTxt() (*asset, error) {
-	bytes, err := testTxtBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	info := bindataFileInfo{name: "test.txt", size: 36, mode: os.FileMode(420), modTime: time.Unix(1475914421, 0)}
+	info := bindataFileInfo{name: "english_dictionary.txt", size: 731, mode: os.FileMode(420), modTime: time.Unix(1475917668, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -184,7 +163,6 @@ func AssetNames() []string {
 var _bindata = map[string]func() (*asset, error){
 	"chinese_dictionary.txt": chinese_dictionaryTxt,
 	"english_dictionary.txt": english_dictionaryTxt,
-	"test.txt": testTxt,
 }
 
 // AssetDir returns the file names below a certain
@@ -229,7 +207,6 @@ type bintree struct {
 var _bintree = &bintree{nil, map[string]*bintree{
 	"chinese_dictionary.txt": &bintree{chinese_dictionaryTxt, map[string]*bintree{}},
 	"english_dictionary.txt": &bintree{english_dictionaryTxt, map[string]*bintree{}},
-	"test.txt": &bintree{testTxt, map[string]*bintree{}},
 }}
 
 // RestoreAsset restores an asset under the given directory
