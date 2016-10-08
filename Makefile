@@ -1,8 +1,13 @@
+all: test
+
 generate:
-	@go generate -x ./...
+	@go generate -x
 
 release: generate
 	@go build
+
+test:
+	@go test
 
 update_dict:
 	@curl -LO https://github.com/downloads/wear/harmonious_dictionary/dictionaries.zip
