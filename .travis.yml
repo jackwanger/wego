@@ -3,6 +3,9 @@ language: go
 go:
   - 1.7
 
+install:
+  - go get github.com/jteeuwen/go-bindata/...
+
 before_deploy:
   - make release
 

@@ -39,18 +39,6 @@
 			"revisionTime": "2015-11-01T11:26:41Z"
 		},
 		{
-			"checksumSHA1": "MzTCg3kFsi/89bf1wGsGJwIykEM=",
-			"path": "github.com/jteeuwen/go-bindata",
-			"revision": "a0ff2567cfb70903282db057e799fd826784d41d",
-			"revisionTime": "2015-10-23T09:11:02Z"
-		},
-		{
-			"checksumSHA1": "1E4XSPmZqO/s20/WWJKXsyGTfm4=",
-			"path": "github.com/jteeuwen/go-bindata/go-bindata",
-			"revision": "a0ff2567cfb70903282db057e799fd826784d41d",
-			"revisionTime": "2015-10-23T09:11:02Z"
-		},
-		{
 			"checksumSHA1": "b0T0Hzd+zYk+OCDTFMps+jwa/nY=",
 			"path": "github.com/manucorporat/sse",
 			"revision": "ee05b128a739a0fb76c7ebd3ae4810c1de808d6d",
