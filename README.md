@@ -24,6 +24,7 @@ curl -XPOST http://localhost:8000/filter -d "message=测试看看"              
 ### 敏感词来源
 
 * 和谐宝典 https://github.com/wear/harmonious_dictionary
+
   ``` bash
   sed -i 's/$/ 2/' chinese_dictionary.txt
   sed -i 's/$/ 2/' english_dictionary.txt
