@@ -20,3 +20,7 @@ curl -XPOST http://localhost:8000/validate -d "message=测试看看"            
 curl -XPOST http://localhost:8000/filter -d "message=测试看看"                                                                                                                                                                       19:17:35
 {"result":"**看看"}
 ```
+
+### 敏感词来源
+
+* 和谐宝典 https://github.com/wear/harmonious_dictionary
