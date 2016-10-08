@@ -3,9 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io/ioutil"
-	"log"
-	"os"
 	"regexp"
 	"runtime"
 	"strings"
@@ -13,6 +10,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/huichen/sego"
+	"github.com/repong/hope_word/dict"
 )
 
 var port int
@@ -20,12 +18,13 @@ var segmenter sego.Segmenter
 
 func init() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	flag.IntVar(&port, "port", 8000, "listen port")
-	flag.Parse()
+	dict.Load(&segmenter)
 }
 
 func main() {
-	prepareDict()
+	flag.IntVar(&port, "port", 8000, "listen port")
+	flag.Parse()
+
 	r := gin.Default()
 	r.POST("/validate", validateEndPoint)
 	r.POST("/filter", filterEndPoint)
@@ -71,33 +70,4 @@ func replaceInvalidWords(segments []sego.Segment, text string) string {
 		}
 	}
 	return text
-}
-
-//go:generate go-bindata -prefix "dict/" -pkg main -o dict.go dict/
-func prepareDict() {
-	var files = make([]string, len(AssetNames()))
-
-	for i, v := range AssetNames() {
-		data, err := Asset(v)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		tmpfile, err := ioutil.TempFile("", v)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		defer os.Remove(tmpfile.Name())
-		files[i] = tmpfile.Name()
-
-		if _, err := tmpfile.Write(data); err != nil {
-			log.Fatal(err)
-		}
-		if err := tmpfile.Close(); err != nil {
-			log.Fatal(err)
-		}
-	}
-
-	segmenter.LoadDictionary(strings.Join(files, ","))
 }
