@@ -4,7 +4,7 @@ go:
   - 1.7
 
 before_deploy:
-  - go build
+  - make release
 
 deploy:
   provider: releases

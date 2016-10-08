@@ -3,6 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
 	"regexp"
 	"runtime"
 	"strings"
@@ -12,28 +15,37 @@ import (
 	"github.com/huichen/sego"
 )
 
+var segmenter sego.Segmenter
 var port int
-var dict string
 
 func init() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	flag.StringVar(&dict, "dict", "dict.txt", "dict files, seperated by comma")
 	flag.IntVar(&port, "port", 8000, "listen port")
 	flag.Parse()
+
+	if err := prepareDict(); err != nil {
+		log.Fatalf("%v", err)
+		os.Exit(1)
+	}
+
+	dict := strings.Join(AssetNames(), ",")
+	segmenter.LoadDictionary(dict)
+}
+
+//go:generate go-bindata -prefix "dict/" -pkg main -o dict.go dict/
+func prepareDict() error {
+	for _, v := range AssetNames() {
+		data, _ := Asset(v)
+		err := ioutil.WriteFile(v, []byte(data), 0644)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func main() {
 	r := gin.Default()
-
-	// Middleware
-	r.Use(func(c *gin.Context) {
-		var segmenter sego.Segmenter
-		segmenter.LoadDictionary(dict)
-		c.Set("Segmenter", segmenter)
-		c.Next()
-	})
-
-	// API
 	r.POST("/validate", validateEndPoint)
 	r.POST("/filter", filterEndPoint)
 	r.Run(fmt.Sprintf(":%d", port))
@@ -41,8 +53,7 @@ func main() {
 
 func validateEndPoint(c *gin.Context) {
 	text := c.PostForm("message")
-	s := c.MustGet("Segmenter").(sego.Segmenter)
-	segments := s.Segment([]byte(text))
+	segments := segmenter.Segment([]byte(text))
 	if IsContainInvalidWord(segments) {
 		c.JSON(200, gin.H{"result": "false"})
 	} else {
@@ -62,8 +73,7 @@ func IsContainInvalidWord(segments []sego.Segment) bool {
 
 func filterEndPoint(c *gin.Context) {
 	text := c.PostForm("message")
-	s := c.MustGet("Segmenter").(sego.Segmenter)
-	segments := s.Segment([]byte(text))
+	segments := segmenter.Segment([]byte(text))
 	text = replaceInvalidWords(segments, text)
 	c.JSON(200, gin.H{"result": text})
 }
