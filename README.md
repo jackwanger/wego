@@ -14,10 +14,10 @@ hope_word -port ":3000" -files "dict1.txt,dict2.txt"
 ### 例子
 
 ``` bash
-curl -XPOST http://localhost:8000/validate -d "message=测试看看"                                                                                                                                                                     19:17:30
+curl -XPOST http://localhost:8000/validate -d "message=测试看看"
 {"result":"false"}
 
-curl -XPOST http://localhost:8000/filter -d "message=测试看看"                                                                                                                                                                       19:17:35
+curl -XPOST http://localhost:8000/filter -d "message=测试看看"
 {"result":"**看看"}
 ```
 
