@@ -2,6 +2,9 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"regexp"
+	"runtime"
 	"strings"
 	"unicode/utf8"
 
@@ -9,30 +12,31 @@ import (
 	"github.com/huichen/sego"
 )
 
-var port string
-var files string
+var port int
+var dict string
 
 func init() {
-	flag.StringVar(&files, "files", "dict.txt", "dict files, seperated by comma")
-	flag.StringVar(&port, "port", ":8000", "listen port")
+	runtime.GOMAXPROCS(runtime.NumCPU())
+	flag.StringVar(&dict, "dict", "dict.txt", "dict files, seperated by comma")
+	flag.IntVar(&port, "port", 8000, "listen port")
 	flag.Parse()
 }
 
 func main() {
 	r := gin.Default()
-	r.Use(Segmenter(files))
-	r.POST("/validate", validateEndPoint)
-	r.POST("/filter", filterEndPoint)
-	r.Run(port)
-}
 
-func Segmenter(files string) gin.HandlerFunc {
-	var segmenter sego.Segmenter
-	segmenter.LoadDictionary(files)
-	return func(c *gin.Context) {
+	// Middleware
+	r.Use(func(c *gin.Context) {
+		var segmenter sego.Segmenter
+		segmenter.LoadDictionary(dict)
 		c.Set("Segmenter", segmenter)
 		c.Next()
-	}
+	})
+
+	// API
+	r.POST("/validate", validateEndPoint)
+	r.POST("/filter", filterEndPoint)
+	r.Run(fmt.Sprintf(":%d", port))
 }
 
 func validateEndPoint(c *gin.Context) {
@@ -70,7 +74,9 @@ func replaceInvalidWords(segments []sego.Segment, text string) string {
 		if token.Frequency() > 1 {
 			oldText := token.Text()
 			newText := strings.Repeat("*", utf8.RuneCountInString(oldText))
-			text = strings.Replace(text, oldText, newText, -1)
+			text = regexp.
+				MustCompile(fmt.Sprintf("(?i)%s", oldText)).
+				ReplaceAllLiteralString(text, newText)
 		}
 	}
 	return text
