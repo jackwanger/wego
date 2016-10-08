@@ -8,7 +8,7 @@
 
 ``` bash
 go get -u github.com/repong/hope_word
-hope_word -port ":3000" -files "dict1.txt,dict2.txt"
+hope_word -port 8000
 ```
 
 ### 例子
@@ -21,11 +21,8 @@ curl -XPOST http://localhost:8000/filter -d "message=测试看看"
 {"result":"**看看"}
 ```
 
-### 敏感词来源
+### 更新字典
 
-* 和谐宝典 https://github.com/wear/harmonious_dictionary
-
-  ``` bash
-  sed -i 's/$/ 2/' chinese_dictionary.txt
-  sed -i 's/$/ 2/' english_dictionary.txt
-  ```
+``` bash
+make update_dict
+```
