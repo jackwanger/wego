@@ -25,16 +25,7 @@ func init() {
 }
 
 func main() {
-	files, err := prepareDict()
-	if err != nil {
-		log.Fatalf("%v", err)
-		os.Exit(1)
-	}
-
-	defer removeDict(files)
-	dict := strings.Join(files, ",")
-	segmenter.LoadDictionary(dict)
-
+	prepareDict()
 	r := gin.Default()
 	r.POST("/validate", validateEndPoint)
 	r.POST("/filter", filterEndPoint)
@@ -83,38 +74,30 @@ func replaceInvalidWords(segments []sego.Segment, text string) string {
 }
 
 //go:generate go-bindata -prefix "dict/" -pkg main -o dict.go dict/
-func prepareDict() ([]string, error) {
-	var files = make([]string, 0)
-	for _, v := range AssetNames() {
+func prepareDict() {
+	var files = make([]string, len(AssetNames()))
+
+	for i, v := range AssetNames() {
 		data, err := Asset(v)
 		if err != nil {
-			return nil, err
+			log.Fatal(err)
 		}
-		f, err := saveTempFile(v, data)
+
+		tmpfile, err := ioutil.TempFile("", v)
 		if err != nil {
-			return nil, err
+			log.Fatal(err)
 		}
-		files = append(files, f.Name())
-	}
-	return files, nil
-}
 
-func saveTempFile(asset string, data []byte) (*os.File, error) {
-	tmpfile, err := ioutil.TempFile("", asset)
-	if err != nil {
-		return nil, err
-	}
-	if _, err := tmpfile.Write(data); err != nil {
-		return nil, err
-	}
-	if err := tmpfile.Close(); err != nil {
-		return nil, err
-	}
-	return tmpfile, nil
-}
+		defer os.Remove(tmpfile.Name())
+		files[i] = tmpfile.Name()
 
-func removeDict(files []string) {
-	for _, f := range files {
-		os.Remove(f)
+		if _, err := tmpfile.Write(data); err != nil {
+			log.Fatal(err)
+		}
+		if err := tmpfile.Close(); err != nil {
+			log.Fatal(err)
+		}
 	}
+
+	segmenter.LoadDictionary(strings.Join(files, ","))
 }
