@@ -4,7 +4,7 @@ generate:
 	@go generate -x ./...
 
 release: generate
-	@go build
+	@go build -ldflags "-X main.buildstamp=`date -u '+%Y-%m-%dT%H:%M:%SZ'` -X main.githash=`git rev-parse HEAD`"
 
 test:
 	@go test

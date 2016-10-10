@@ -16,14 +16,14 @@ import (
 var port int
 var segmenter sego.Segmenter
 
-func init() {
-	runtime.GOMAXPROCS(runtime.NumCPU())
-	dict.Load(&segmenter)
-}
-
 func main() {
+	version()
+
 	flag.IntVar(&port, "port", 8000, "listen port")
 	flag.Parse()
+
+	runtime.GOMAXPROCS(runtime.NumCPU())
+	dict.Load(&segmenter)
 
 	r := gin.Default()
 	r.POST("/validate", validateEndPoint)
