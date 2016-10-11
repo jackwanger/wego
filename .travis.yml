@@ -16,3 +16,7 @@ deploy:
   overwrite: true
   on:
     tags: true
+
+notifications:
+  slack:
+    secure: LkYa3LZFjPHgrBuLq8fzYog2/v5JwwJNekBjBjJjbBPmY/VP2oiykrZjM40yyrTxIstDXzaVZtqnhzn0SGXq0FFeV30h9OviLTjVhxwsZkXBl11ge/eCWSRPjKy33N8nVyDnHQBwNooW2ePR9UVDJ1c3mRAFo1PnU6sAAQtVJpI=
