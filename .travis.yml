@@ -1,12 +1,11 @@
 language: go
 
-go:
-  - 1.7
-
 matrix:
   include:
     - os: linux
+      go: 1.7
     - os: osx
+      go: 1.7
 
 before_deploy:
   - go get github.com/jteeuwen/go-bindata/...
