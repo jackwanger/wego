@@ -10,19 +10,24 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/huichen/sego"
-	"github.com/repong/hope_word/dict"
+	"github.com/repong/wego/dict"
 )
 
+var (
+	githash    string
+	buildstamp string
+)
 var port int
 var segmenter sego.Segmenter
 
 func main() {
-	version()
 
 	flag.IntVar(&port, "port", 8000, "listen port")
 	flag.Parse()
 
 	runtime.GOMAXPROCS(runtime.NumCPU())
+	fmt.Printf("Git Hash   : %s\n", githash)
+	fmt.Printf("Build Time : %s\n", buildstamp)
 	dict.Load(&segmenter)
 
 	r := gin.Default()

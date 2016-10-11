@@ -11,7 +11,7 @@ deploy:
   provider: releases
   api_key:
     secure: DkfgP9l+PM9eSWSeeKbozCMkfCi6RdC5wvbVtI3UGlC2/XLZlotzWhE3b4kBWOnXZtkNn/pfBe6cHH3YlBFlMaRAUmfExE4bVElozvOuM2Cufv4HceSbJMGtJe2uoyTQjTRUAcP9ZsZUf6mFmXSjb0bcYuYkD7KXWU+M1ZXdhA0=
-  file: hope_word
+  file: wego
   skip_cleanup: true
   overwrite: true
   on:
