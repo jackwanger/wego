@@ -13,8 +13,10 @@ import (
 	"github.com/repong/wego/dict"
 )
 
+// Auto versioning
 var (
 	env        string
+	version    string
 	githash    string
 	buildstamp string
 )
@@ -35,6 +37,7 @@ func main() {
 	flag.IntVar(&port, "port", 8000, "listen port")
 	flag.Parse()
 
+	fmt.Printf("Version    : %s\n", version)
 	fmt.Printf("Git Hash   : %s\n", githash)
 	fmt.Printf("Build Time : %s\n", buildstamp)
 	dict.Load(&segmenter)
