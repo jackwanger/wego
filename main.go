@@ -14,18 +14,27 @@ import (
 )
 
 var (
+	env        string
 	githash    string
 	buildstamp string
 )
+
 var port int
 var segmenter sego.Segmenter
 
-func main() {
+func init() {
+	if env == "release" {
+		runtime.GOMAXPROCS(runtime.NumCPU())
+		gin.SetMode(gin.ReleaseMode)
+	} else {
+		gin.SetMode(gin.DebugMode)
+	}
+}
 
+func main() {
 	flag.IntVar(&port, "port", 8000, "listen port")
 	flag.Parse()
 
-	runtime.GOMAXPROCS(runtime.NumCPU())
 	fmt.Printf("Git Hash   : %s\n", githash)
 	fmt.Printf("Build Time : %s\n", buildstamp)
 	dict.Load(&segmenter)
