@@ -10,7 +10,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: DkfgP9l+PM9eSWSeeKbozCMkfCi6RdC5wvbVtI3UGlC2/XLZlotzWhE3b4kBWOnXZtkNn/pfBe6cHH3YlBFlMaRAUmfExE4bVElozvOuM2Cufv4HceSbJMGtJe2uoyTQjTRUAcP9ZsZUf6mFmXSjb0bcYuYkD7KXWU+M1ZXdhA0=
+    secure: T+KL3sT9p6ZjT9CFUJdb0h91iDrJ7oCpxvL8arQoYis+horWyxwiIsD9HunJ19BjWD2G1Xs5GHAjQvIPLuYvj/vmDkfy26CB/ZSj0j2DnnTMeORw1tQ3mZxaDlL1GLziRHTU2Ugcbsp3cd/hWxlObki6Zv/hvQHl7KivA4Nptsc=
   file: wego
   skip_cleanup: true
   overwrite: true
