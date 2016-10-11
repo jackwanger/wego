@@ -1,7 +1,6 @@
 package dict
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -15,7 +14,6 @@ func Load(segmenter *sego.Segmenter) {
 	var files = make([]string, len(AssetNames()))
 
 	for i, v := range AssetNames() {
-		fmt.Println(v)
 		data, err := Asset(v)
 		if err != nil {
 			log.Fatal(err)
