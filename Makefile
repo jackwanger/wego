@@ -23,5 +23,3 @@ update_dict:
 	@rm -f dictionaries.zip
 	@find dict/assets/ -type f -print0 | xargs -0 sed -i 's/$$/ 2/'
 	@go generate -x ./...
-
-.PHONY: generate release update_dict
