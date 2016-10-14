@@ -4,10 +4,7 @@ endif
 
 all: test
 
-generate:
-	@go generate -x ./...
-
-release: generate
+release:
 	@go build -ldflags "-s -w \
 -X main.env=release \
 -X main.buildstamp=`date -u '+%Y-%m-%dT%H:%M:%SZ'` \
@@ -16,10 +13,3 @@ release: generate
 
 test:
 	@go test
-
-update_dict:
-	@curl -LO https://github.com/downloads/wear/harmonious_dictionary/dictionaries.zip
-	@unzip -o dictionaries.zip -d dict/assets/
-	@rm -f dictionaries.zip
-	@find dict/assets/ -type f -print0 | xargs -0 sed -i 's/$$/ 2/'
-	@go generate -x ./...

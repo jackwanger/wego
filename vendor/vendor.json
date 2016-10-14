@@ -45,6 +45,12 @@
 			"revisionTime": "2016-01-26T18:01:36Z"
 		},
 		{
+			"checksumSHA1": "TKX6Nybfok0QoLhWc0jA2wTrm1I=",
+			"path": "github.com/repong/hardict",
+			"revision": "3c5d494263b0fe1000424ad642796287ba5070f9",
+			"revisionTime": "2016-10-14T07:36:37Z"
+		},
+		{
 			"checksumSHA1": "9jjO5GjLa0XF/nfWihF02RoH4qc=",
 			"path": "golang.org/x/net/context",
 			"revision": "ffe101cce3477a6c6d8f0754d103bb0a84ec1266",

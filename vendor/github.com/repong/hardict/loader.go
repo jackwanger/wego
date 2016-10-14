@@ -1,4 +1,4 @@
-package dict
+package hardict
 
 import (
 	"io/ioutil"
@@ -9,8 +9,7 @@ import (
 	"github.com/huichen/sego"
 )
 
-//go:generate go-bindata -prefix "assets/" -pkg dict -o assets.go assets/
-func Load(segmenter *sego.Segmenter) {
+func load(segmenter *sego.Segmenter) {
 	var files = make([]string, len(AssetNames()))
 
 	for i, v := range AssetNames() {
