@@ -8,7 +8,6 @@ matrix:
       go: 1.7
 
 before_deploy:
-  - go get github.com/jteeuwen/go-bindata/...
   - make release
   - tar czf wego-${TRAVIS_OS_NAME}-${TRAVIS_TAG}.tar.gz wego
 
