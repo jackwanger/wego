@@ -42,4 +42,4 @@ Build Time : 2016-10-14T07:45:22Z
 
 ### 字典
 
-* https://github.com/repong/hardict封装了更新字典及检测屏蔽字的方法
+* https://github.com/repong/hardict 封装了更新字典及检测屏蔽字的方法
