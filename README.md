@@ -10,6 +10,20 @@
 2. `tar zxf wego-osx-1.0.0.tar.gz`
 3. `./wego` (默认8000端口，可以使用`./wego -port 1234`修改监听端口)
 
+运行情况如下：
+
+``` bash
+Loading dict...
+载入sego词典 /var/folders/yy/ksdhbgf551bgg_5p0dkyd5kr0000gn/T/chinese_dictionary.txt844575244
+载入sego词典 /var/folders/yy/ksdhbgf551bgg_5p0dkyd5kr0000gn/T/english_dictionary.txt811498491
+sego词典载入完毕
+Version    : 1.0.0-5-g8c1e0b9
+Git Hash   : 8c1e0b943ea21f72e4eca8adc7a931ebb287da8f
+Build Time : 2016-10-14T07:45:22Z
+[GIN] 2016/10/14 - 15:45:46 | 200 |     148.311µs | 127.0.0.1 |   POST    /filter
+[GIN] 2016/10/14 - 15:46:18 | 200 |      93.437µs | 127.0.0.1 |   POST    /validate
+```
+
 ### 客户端如何调用？
 
 1. 验证是否包含屏蔽字
@@ -28,21 +42,4 @@
 
 ### 字典
 
-* 字典来源
-
-  https://github.com/wear/harmonious_dictionary
-
-* 如何更新
-
-  ``` bash
-  make update_dict
-  ```
-
-* 字典格式
-
-  一般只需要如下配置，其中，词频是一个数字，数字大的会优先匹配，必须大于1
-
-  ```
-  屏蔽字1 词频
-  屏蔽字2 词频
-  ```
+* https://github.com/repong/hardict封装了更新字典及检测屏蔽字的方法
