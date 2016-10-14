@@ -2,7 +2,7 @@
 
 ![travis](https://travis-ci.org/repong/wego.svg?branch=master)
 
-基于sego的屏蔽字过滤器
+屏蔽字过滤服务
 
 ### 用法
 
@@ -43,3 +43,8 @@ Build Time : 2016-10-14T07:45:22Z
 ### 字典
 
 * https://github.com/repong/hardict 封装了更新字典及检测屏蔽字的方法
+
+### Todo
+
+* [x] http
+* [ ] gRPC
