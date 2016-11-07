@@ -9,3 +9,6 @@ update_dict:
 	@find assets/ -type f -print0 | xargs -0 sed -i 's/$$/ 2/'
 	@go generate -x
 	@rm -rf dictionaries.zip assets/
+
+generate_dict:
+	@go generate -x

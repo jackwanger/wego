@@ -29,6 +29,8 @@ func main() {
 	flag.IntVar(&port, "port", 8000, "listen port")
 	flag.Parse()
 
+	fmt.Println("Listening at", port)
+
 	r := gin.Default()
 	r.POST("/validate", validateEndPoint)
 	r.POST("/filter", filterEndPoint)
