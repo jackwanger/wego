@@ -9,12 +9,6 @@
 			"revisionTime": "2015-11-03T15:22:50Z"
 		},
 		{
-			"checksumSHA1": "XxSDNaJf0LpjvMapDmmhNIlf+MQ=",
-			"path": "github.com/gin-gonic/gin",
-			"revision": "5caaac4c5c712a9e7a7de29e6c24ef46c753017f",
-			"revisionTime": "2016-04-14T23:39:28Z"
-		},
-		{
 			"checksumSHA1": "UsILDoIB2S7ra+w2fMdb85mX3HM=",
 			"path": "github.com/gin-gonic/gin/binding",
 			"revision": "5caaac4c5c712a9e7a7de29e6c24ef46c753017f",
@@ -55,6 +49,12 @@
 			"path": "golang.org/x/net/context",
 			"revision": "ffe101cce3477a6c6d8f0754d103bb0a84ec1266",
 			"revisionTime": "2016-10-03T09:22:05Z"
+		},
+		{
+			"checksumSHA1": "hT+7DPyl8tQ96kUXW3Sr5o0Pcj0=",
+			"path": "gopkg.in/gin-gonic/gin.v1",
+			"revision": "e2212d40c62a98b388a5eb48ecbdcf88534688ba",
+			"revisionTime": "2016-12-04T22:13:08Z"
 		},
 		{
 			"checksumSHA1": "39V1idWER42Lmcmg2Uy40wMzOlo=",
