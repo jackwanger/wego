@@ -1,5 +1,10 @@
 package: github.com/repong/wego
 import:
-- package: github.com/repong/hardict
-- package: gopkg.in/gin-gonic/gin.v1
+- package: github.com/gin-gonic/gin
   version: ~1.1.4
+- package: github.com/repong/sego
+testImport:
+- package: github.com/stretchr/testify
+  version: ~1.1.4
+  subpackages:
+  - assert

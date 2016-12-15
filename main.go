@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/repong/hardict"
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
+	"github.com/repong/wego/dict"
 )
 
 // Auto versioning
@@ -15,10 +15,12 @@ var (
 )
 
 var port int
+var dictPath string
 
 func init() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+
 	if env == "release" {
-		runtime.GOMAXPROCS(runtime.NumCPU())
 		gin.SetMode(gin.ReleaseMode)
 	} else {
 		gin.SetMode(gin.DebugMode)
@@ -26,20 +28,22 @@ func init() {
 }
 
 func main() {
+	flag.StringVar(&dictPath, "dict", "", "Directory path. Multiple directories use comma seperated string like a,b,c")
 	flag.IntVar(&port, "port", 8000, "listen port")
 	flag.Parse()
 
+	dict.Load(dictPath)
 	fmt.Println("Listening at", port)
 
 	r := gin.Default()
-	r.POST("/validate", validateEndPoint)
+	r.GET("/validate", validateEndPoint)
 	r.POST("/filter", filterEndPoint)
 	r.Run(fmt.Sprintf(":%d", port))
 }
 
 func validateEndPoint(c *gin.Context) {
-	text := c.PostForm("message")
-	if hardict.ExistInvalidWord(text) {
+	text := c.Query("message")
+	if dict.ExistInvalidWord(text) {
 		c.JSON(200, gin.H{"result": "false"})
 	} else {
 		c.JSON(200, gin.H{"result": "true"})
@@ -48,6 +52,6 @@ func validateEndPoint(c *gin.Context) {
 
 func filterEndPoint(c *gin.Context) {
 	text := c.PostForm("message")
-	text = hardict.ReplaceInvalidWords(text)
+	text = dict.ReplaceInvalidWords(text)
 	c.JSON(200, gin.H{"result": text})
 }
