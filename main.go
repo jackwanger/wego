@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/gin-gonic/gin"
 	"github.com/repong/hardict"
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
 // Auto versioning
