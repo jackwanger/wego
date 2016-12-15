@@ -13,15 +13,16 @@
 运行情况如下：
 
 ``` bash
-Loading dict...
-载入sego词典 /var/folders/yy/ksdhbgf551bgg_5p0dkyd5kr0000gn/T/chinese_dictionary.txt844575244
-载入sego词典 /var/folders/yy/ksdhbgf551bgg_5p0dkyd5kr0000gn/T/english_dictionary.txt811498491
+$ ./wego -dict /tmp/dict1.txt,/tmp/dict2.txt
+Version    : 1.1.0-1-g4345260
+Git Hash   : a0bb954eeb2c277498b03da247bfe28625a5a2a9
+Build Time : 2016-12-14T11:30:27Z
+载入sego词典 /tmp/dict1.txt
+载入sego词典 /tmp/dict2.txt
 sego词典载入完毕
-Version    : 1.0.0-5-g8c1e0b9
-Git Hash   : 8c1e0b943ea21f72e4eca8adc7a931ebb287da8f
-Build Time : 2016-10-14T07:45:22Z
-[GIN] 2016/10/14 - 15:45:46 | 200 |     148.311µs | 127.0.0.1 |   POST    /filter
-[GIN] 2016/10/14 - 15:46:18 | 200 |      93.437µs | 127.0.0.1 |   POST    /validate
+Listening at 8000
+[GIN] 2016/12/15 - 15:45:46 | 200 |     148.311µs | 127.0.0.1 |   POST    /filter
+[GIN] 2016/12/15 - 15:46:18 | 200 |      93.437µs | 127.0.0.1 |   GET    /validate
 ```
 
 ### 客户端如何调用？
@@ -42,7 +43,8 @@ Build Time : 2016-10-14T07:45:22Z
 
 ### 字典
 
-* https://github.com/repong/hardict 封装了更新字典及检测屏蔽字的方法
+* ~~https://github.com/repong/hardict 封装了更新字典及检测屏蔽字的方法~~
+* 使用用户自定义字典，每行一个文本
 
 ### Todo
 
