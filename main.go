@@ -28,7 +28,7 @@ func init() {
 }
 
 func main() {
-	flag.StringVar(&dictPath, "dict", "", "Directory path. Multiple directories use comma seperated string like a,b,c")
+	flag.StringVar(&dictPath, "dict", "", "Directory path. Multiple directories use comma separated string like a,b,c")
 	flag.IntVar(&port, "port", 8000, "listen port")
 	flag.Parse()
 
