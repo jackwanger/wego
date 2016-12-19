@@ -1,6 +1,7 @@
 # wego
 
 ![travis](https://travis-ci.org/repong/wego.svg?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/repong/wego)](https://goreportcard.com/report/github.com/repong/wego)
 
 屏蔽字过滤服务
 
