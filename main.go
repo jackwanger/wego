@@ -37,6 +37,7 @@ func main() {
 
 	r := gin.Default()
 	r.GET("/validate", validateEndPoint)
+	r.POST("/validate", validateEndPoint)
 	r.POST("/filter", filterEndPoint)
 	r.Run(fmt.Sprintf(":%d", port))
 }
