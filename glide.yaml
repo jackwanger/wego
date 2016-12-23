@@ -2,3 +2,4 @@ package: github.com/repong/wego
 import:
 - package: github.com/repong/sego
 - package: github.com/gorilla/mux
+- package: github.com/gorilla/handlers

@@ -1,10 +1,12 @@
-hash: ff5bb1121a6f1fdc2390cec050048cbcdde9be5ff6b161f3a5af3c7f5d4382d9
-updated: 2016-12-23T17:50:41.268799995+08:00
+hash: dee6d62a802504e23ad4a554827a4842ecb03e92552c79e97e66d29d881b48ce
+updated: 2016-12-23T18:04:14.961751+08:00
 imports:
 - name: github.com/adamzy/cedar-go
   version: d348c21f72432c2b6d5f05f68759fde94f64b227
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/handlers
+  version: 3a5767ca75ece5f7f1440b1d16975247f8d8b221
 - name: github.com/gorilla/mux
   version: 757bef944d0f21880861c2dd9c871ca543023cba
 - name: github.com/repong/sego

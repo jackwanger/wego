@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"runtime"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/repong/wego/dict"
 )
@@ -21,46 +23,53 @@ var port int
 var dictPath string
 
 func init() {
-	runtime.GOMAXPROCS(runtime.NumCPU())
+	flag.StringVar(&dictPath, "dict", "", "Comma separated string like dict1,dict2,...")
+	flag.IntVar(&port, "port", 8000, "listen port")
 }
 
 // Result for validate and filter requests
 type Result struct {
-	Result string `json:"result"`
+	Result interface{} `json:"result"`
 }
 
 func main() {
-	flag.StringVar(&dictPath, "dict", "", "Directory path. Multiple directories use comma separated string like a,b,c")
-	flag.IntVar(&port, "port", 8000, "listen port")
 	flag.Parse()
 
+	runtime.GOMAXPROCS(runtime.NumCPU())
 	dict.Load(dictPath)
-	fmt.Println("Listening at", port)
 
 	r := mux.NewRouter()
-	r.HandleFunc("/validate", validateFunc).Methods("POST")
-	r.HandleFunc("/filter", filterFunc).Methods("POST")
+	r.HandleFunc("/validate", validate).Methods("POST")
+	r.HandleFunc("/filter", filter).Methods("POST")
 
 	addr := fmt.Sprintf(":%d", port)
-	log.Fatal(http.ListenAndServe(addr, r))
-}
+	fmt.Println("Listening at", addr)
 
-func validateFunc(w http.ResponseWriter, r *http.Request) {
-	text := r.FormValue("message")
-	if dict.ExistInvalidWord(text) {
-		writeJSON(w, &Result{"true"})
+	if env == "release" {
+		log.Fatal(http.ListenAndServe(addr, r))
 	} else {
-		writeJSON(w, &Result{"false"})
+		loggedRouter := handlers.LoggingHandler(os.Stdout, r)
+		log.Fatal(http.ListenAndServe(addr, loggedRouter))
 	}
-}
-
-func filterFunc(w http.ResponseWriter, r *http.Request) {
-	text := r.FormValue("message")
-	text = dict.ReplaceInvalidWords(text)
-	writeJSON(w, &Result{text})
 }
 
 func writeJSON(w http.ResponseWriter, v interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(v)
+}
+
+func validate(w http.ResponseWriter, r *http.Request) {
+	text := r.FormValue("message")
+	invalid := dict.ExistInvalidWord(text)
+	if invalid {
+		writeJSON(w, &Result{"false"})
+	} else {
+		writeJSON(w, &Result{"true"})
+	}
+}
+
+func filter(w http.ResponseWriter, r *http.Request) {
+	text := r.FormValue("message")
+	filtered := dict.ReplaceInvalidWords(text)
+	writeJSON(w, &Result{filtered})
 }
