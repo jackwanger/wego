@@ -36,14 +36,13 @@ func main() {
 	fmt.Println("Listening at", port)
 
 	r := gin.Default()
-	r.GET("/validate", validateEndPoint)
 	r.POST("/validate", validateEndPoint)
 	r.POST("/filter", filterEndPoint)
 	r.Run(fmt.Sprintf(":%d", port))
 }
 
 func validateEndPoint(c *gin.Context) {
-	text := c.Query("message")
+	text := c.PostForm("message")
 	if dict.ExistInvalidWord(text) {
 		c.JSON(200, gin.H{"result": "false"})
 	} else {
