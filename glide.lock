@@ -1,45 +1,12 @@
-hash: 3ccff59b3d9ee0d4f3dd679ee47854893aa5671c41c791a76f02c7cc82468c34
-updated: 2016-12-15T19:27:47.246381906+08:00
+hash: ff5bb1121a6f1fdc2390cec050048cbcdde9be5ff6b161f3a5af3c7f5d4382d9
+updated: 2016-12-23T17:50:41.268799995+08:00
 imports:
 - name: github.com/adamzy/cedar-go
   version: d348c21f72432c2b6d5f05f68759fde94f64b227
-- name: github.com/gin-gonic/gin
-  version: e2212d40c62a98b388a5eb48ecbdcf88534688ba
-  subpackages:
-  - binding
-  - render
-- name: github.com/golang/protobuf
-  version: 2402d76f3d41f928c7902a765dfc872356dd3aad
-  subpackages:
-  - proto
-- name: github.com/manucorporat/sse
-  version: ee05b128a739a0fb76c7ebd3ae4810c1de808d6d
-- name: github.com/mattn/go-isatty
-  version: 30a891c33c7cde7b02a981314b4228ec99380cca
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/mux
+  version: 757bef944d0f21880861c2dd9c871ca543023cba
 - name: github.com/repong/sego
-  version: e1daa047877ee9f11d782b6e5ec64f9b16b6246c
-- name: golang.org/x/net
-  version: f315505cf3349909cdf013ea56690da34e96a451
-  subpackages:
-  - context
-- name: golang.org/x/sys
-  version: d75a52659825e75fff6158388dddc6a5b04f9ba5
-  subpackages:
-  - unix
-- name: gopkg.in/go-playground/validator.v8
-  version: c193cecd124b5cc722d7ee5538e945bdb3348435
-- name: gopkg.in/yaml.v2
-  version: a5b47d31c556af34a302ce5d659e6fea44d90de0
-testImports:
-- name: github.com/davecgh/go-spew
-  version: 5215b55f46b2b919f50a1df0eaa5886afe4e3b3d
-  subpackages:
-  - spew
-- name: github.com/pmezard/go-difflib
-  version: 792786c7400a136282c1664665ae0a8db921c6c2
-  subpackages:
-  - difflib
-- name: github.com/stretchr/testify
-  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
-  subpackages:
-  - assert
+  version: 5c2013595dfad6413acc49e5d128f303ba5becea
+testImports: []

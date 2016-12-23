@@ -1,11 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
+	"log"
+	"net/http"
 	"runtime"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gorilla/mux"
 	"github.com/repong/wego/dict"
 )
 
@@ -19,12 +22,11 @@ var dictPath string
 
 func init() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
+}
 
-	if env == "release" {
-		gin.SetMode(gin.ReleaseMode)
-	} else {
-		gin.SetMode(gin.DebugMode)
-	}
+// Result for validate and filter requests
+type Result struct {
+	Result string `json:"result"`
 }
 
 func main() {
@@ -35,23 +37,30 @@ func main() {
 	dict.Load(dictPath)
 	fmt.Println("Listening at", port)
 
-	r := gin.Default()
-	r.POST("/validate", validateEndPoint)
-	r.POST("/filter", filterEndPoint)
-	r.Run(fmt.Sprintf(":%d", port))
+	r := mux.NewRouter()
+	r.HandleFunc("/validate", validateFunc).Methods("POST")
+	r.HandleFunc("/filter", filterFunc).Methods("POST")
+
+	addr := fmt.Sprintf(":%d", port)
+	log.Fatal(http.ListenAndServe(addr, r))
 }
 
-func validateEndPoint(c *gin.Context) {
-	text := c.PostForm("message")
+func validateFunc(w http.ResponseWriter, r *http.Request) {
+	text := r.FormValue("message")
 	if dict.ExistInvalidWord(text) {
-		c.JSON(200, gin.H{"result": "false"})
+		writeJSON(w, &Result{"true"})
 	} else {
-		c.JSON(200, gin.H{"result": "true"})
+		writeJSON(w, &Result{"false"})
 	}
 }
 
-func filterEndPoint(c *gin.Context) {
-	text := c.PostForm("message")
+func filterFunc(w http.ResponseWriter, r *http.Request) {
+	text := r.FormValue("message")
 	text = dict.ReplaceInvalidWords(text)
-	c.JSON(200, gin.H{"result": text})
+	writeJSON(w, &Result{text})
+}
+
+func writeJSON(w http.ResponseWriter, v interface{}) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(v)
 }
